@@ -28,8 +28,6 @@
 
 ;;; Code:
 
-(require 'helm)
-
 (defvar audacious-msg "" "Stores a message string.")
 (defvar audacious-playlist-position nil "An index number of a playlist.")
 (defvar audacious-playlist-length nil "A length of a playlist.")
@@ -127,6 +125,7 @@
 (defun audacious-song-goto-helm ()
   "Select a song with helm interface."
   (interactive)
+  (require 'helm)
   (let ((title (helm :sources (helm-build-sync-source "audacious"
                                 :candidates (butlast (butlast (cdr (split-string (shell-command-to-string "audtool --playlist-display") "\n"))))
                                 :fuzzy-match nil)
